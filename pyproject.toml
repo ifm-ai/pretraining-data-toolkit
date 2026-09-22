@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=69", "wheel>=0.43"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pretraining-data-toolkit"
+version = "0.1.0"
+description = "Annotation, quality bucketing, shuffling, and inspection for pretraining data"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "numpy>=1.26,<2",
+  "pyarrow>=18,<24",
+  "polars>=1.32,<2",
+  "orjson>=3.10,<4",
+]
+
+[project.optional-dependencies]
+annotate = [
+  "torch>=2.4,<3",
+  "transformers>=4.41.2,<5",
+  "huggingface-hub>=0.24,<1",
+  "fasttext>=0.9.3,<0.10",
+  "pandas>=2.2,<3",
+  "tqdm>=4.66,<5",
+  "einops>=0.8,<1",
+  "sentencepiece>=0.2,<0.3",
+]
+inspect = ["rich>=13,<15", "colorist>=1.8,<2", "transformers>=4.41.2,<5", "sentencepiece>=0.2,<0.3"]
+dev = ["build>=1,<2"]
+
+[project.scripts]
+party = "tools.party:main"
+pretraining-annotate = "annotate.annotate_v2:main"
+pretraining-classify = "annotate.classify:main"
+pretraining-count = "annotate.count_docs:main"
+pretraining-shuffle = "shuffle.shuffle_2ndpass:main"
+pretraining-salvage = "shuffle.salvage_parquet:main"
+pretraining-download-models = "tools.download_models:main"
+
+[tool.setuptools.packages.find]
+include = ["annotate*", "shuffle*", "tools*", "pretraining_data*"]
+
+[tool.setuptools.package-data]
+annotate = ["*.json", "*.sh", "README.md"]
+shuffle = ["*.sh", "README.md"]
+tools = ["README.md"]
+pretraining_data = ["*.json", "README.md"]

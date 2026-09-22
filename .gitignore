@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.env
+.DS_Store
+__MACOSX/
+data/
+output/
+work/
+logs/
+models.lock.json
+wheelhouse/

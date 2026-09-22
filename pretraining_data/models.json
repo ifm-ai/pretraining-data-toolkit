@@ -1,0 +1,28 @@
+{
+  "WebOrganizer/TopicClassifier": {
+    "revision": "main",
+    "kind": "transformers"
+  },
+  "WebOrganizer/FormatClassifier": {
+    "revision": "main",
+    "kind": "transformers"
+  },
+  "HuggingFaceTB/fineweb-edu-classifier": {
+    "revision": "main",
+    "kind": "transformers"
+  },
+  "core42/jais-13b": {
+    "revision": "main",
+    "kind": "tokenizer"
+  },
+  "mlfoundations/fasttext-oh-eli5": {
+    "revision": "main",
+    "kind": "fasttext",
+    "filename": "openhermes_reddit_eli5_vs_rw_v2_bigram_200k_train.bin"
+  },
+  "hkust-nlp/preselect-fasttext-classifier": {
+    "revision": "main",
+    "kind": "fasttext",
+    "filename": "PreSelect-classifier.bin"
+  }
+}

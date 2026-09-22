@@ -1,0 +1,2 @@
+# Install from the repository root. See pyproject.toml for the dependency source of truth.
+-e .
