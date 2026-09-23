@@ -74,6 +74,29 @@ category that contains Parquet files. Annotation keeps source columns (flattenin
 one dictionary level); bucketing intentionally projects a documented training
 schema. Pass 2 emits JSONL, not Parquet.
 
+## Inspect datasets with `party`
+
+`party` is a command-line dataset inspector for quickly spot-checking records.
+It samples JSON, JSONL (including gzip), Parquet, trajectory JSON, and `.ds` token
+files, or picks a supported file from a directory. Use interactive mode to browse
+samples, a zero-based index to inspect a specific record, or a nested selector to
+print only the fields you need.
+
+Run the script directly from the repository, substituting your dataset paths:
+
+```bash
+python tools/party /path/to/dataset.jsonl
+python tools/party -I /path/to/dataset.jsonl
+python tools/party -i 0 /path/to/dataset.jsonl text
+python tools/party record.json 'messages[].content'
+```
+
+Add `-t` to truncate long content. Quote selectors containing brackets to prevent
+shell expansion. Directory sampling picks a file first, so it is not uniform over
+all records in the corpus. Parquet inspection requires PyArrow; `.ds` decoding
+requires Transformers and a companion metadata file. See [dataset tools](tools/README.md)
+for more details.
+
 ## Parallel runs and recovery
 
 Use `RANK` and `WORLD_SIZE`, or a contiguous SLURM array. See
@@ -86,12 +109,3 @@ only after successful writing; incomplete `.tmp` files are not completion marker
 Use a new output directory after changing inputs, models or settings. Bucketing
 and shuffling reject existing output for a rank; use fresh directories when
 restarting either stage. Partial outputs from a failed shuffle are not a dataset.
-
-## Provenance and licensing
-
-All original source scripts and three threshold files are preserved or updated;
-`tools/party.txt` is now executable Python in `tools/party.py`. macOS archive metadata
-and organization-specific paths, accounts, queues, and environment activation were
-removed. No source-code license was supplied, so none has been invented. The
-repository owner must select the source license before public distribution.
-Model artifacts retain their upstream terms; see [third-party sources](THIRD_PARTY.md).
