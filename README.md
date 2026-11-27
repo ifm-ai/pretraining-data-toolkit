@@ -85,10 +85,10 @@ print only the fields you need.
 Run the script directly from the repository, substituting your dataset paths:
 
 ```bash
-python tools/party /path/to/dataset.jsonl
-python tools/party -I /path/to/dataset.jsonl
-python tools/party -i 0 /path/to/dataset.jsonl text
-python tools/party record.json 'messages[].content'
+python tools/party.py /path/to/dataset.jsonl
+python tools/party.py -I /path/to/dataset.jsonl
+python tools/party.py -i 0 /path/to/dataset.jsonl text
+python tools/party.py record.json 'messages[].content'
 ```
 
 Add `-t` to truncate long content. Quote selectors containing brackets to prevent
